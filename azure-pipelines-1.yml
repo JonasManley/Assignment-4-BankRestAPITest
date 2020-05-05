@@ -15,20 +15,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: InvokeRESTAPI@1
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    connectionType: 'connectedServiceNameARM'
+    azureServiceConnection: 'Microsoft Imagine(0e20856b-7b49-43e4-8b80-48b5a71663b7)'
+    method: 'GET'
+    urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
+    waitForCompletion: 'false'
