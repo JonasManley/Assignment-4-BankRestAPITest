@@ -27,4 +27,3 @@ steps:
       }
     urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
     waitForCompletion: 'false'
-    successCriteria: '"status" : "successful"'
