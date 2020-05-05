@@ -15,10 +15,16 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - task: InvokeRESTAPI@1
   inputs:
     connectionType: 'connectedServiceNameARM'
     azureServiceConnection: 'Microsoft Imagine(0e20856b-7b49-43e4-8b80-48b5a71663b7)'
     method: 'GET'
+    headers: |
+      {
+      "Content-Type":"application/json"
+      }
     urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
     waitForCompletion: 'false'
+    successCriteria: '"status" : "successful"'
