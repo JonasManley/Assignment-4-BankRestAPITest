@@ -9,14 +9,17 @@ namespace BankRestWebservice.Models
     public class Account
     {
         private string number;
-        private long balance = 0;
+        private int balance = 0;  //should be at least a double - but database was created using a int - for this example we didn't bordered changing it.
         private IBank bank;
         private ICustomer customer;
 
         public string Number { get { return number; } set { number = value; } }
-        public long Balance { get { return balance; } set { balance = value; } }
+        public int Balance { get { return balance; } set { balance = value; } }
 
+        public Account()
+        {
 
+        }
         public Account(string number)
         {
             this.number = number;
@@ -28,7 +31,7 @@ namespace BankRestWebservice.Models
         }
 
 
-        public void Transfer(long amount, IAccount target)
+        public void Transfer(int amount, IAccount target)
         {
             if (amount < 0)
             {
@@ -38,7 +41,7 @@ namespace BankRestWebservice.Models
             target.Balance += amount;
         }
 
-        public void Transfer(long amount, string targetNumber)
+        public void Transfer(int amount, string targetNumber)
         {
             if (balance < 0)
             {

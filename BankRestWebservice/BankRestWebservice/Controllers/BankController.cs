@@ -50,7 +50,7 @@ namespace BankRestWebservice.Controllers
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (cvr == reader.GetInt32(1))
+                    if (cvr == reader.GetInt32(0))
                     {
                         Bank bankHolder = new Bank()
                         {
