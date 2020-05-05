@@ -12,7 +12,8 @@ namespace BankRestWebservice.Controllers
     public class CustomerController : ApiController
     {
         // GET api/<controller>
-        private SqlConnection conn;
+        private SqlConnection conn = new SqlConnection("Server=tcp:myservereasj.database.windows.net,1433;Initial Catalog=mydatabase;Persist Security Info=False;User ID=Serveradmin;Password=Test12345; Connection Timeout=30;");
+
 
 
         //GET api/Customer
@@ -20,7 +21,6 @@ namespace BankRestWebservice.Controllers
         public List<Customer> GetAllCustomer()
         {
             var list = new List<Customer>();
-            conn = new SqlConnection("Server=tcp:myservereasj.database.windows.net,1433;Initial Catalog=mydatabase;Persist Security Info=False;User ID=Serveradmin;Password=Test12345; Connection Timeout=30;");
             var query = "SELECT * FROM Customer";
             conn.Open();
 
@@ -48,8 +48,6 @@ namespace BankRestWebservice.Controllers
         public Customer GetCusomterByCPR(int cpr)
         {
             Customer customer = new Customer();
-
-            conn = new SqlConnection("Server=tcp:myservereasj.database.windows.net,1433;Initial Catalog=mydatabase;Persist Security Info=False;User ID=Serveradmin;Password=Test12345; Connection Timeout=30;");
             var query = "SELECT * FROM Customer";
             conn.Open();
             using (var command = new SqlCommand(query, conn))
@@ -76,16 +74,14 @@ namespace BankRestWebservice.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]Customer value)
+        public void Post([FromBody]Customer customer)
         {
-            conn = new SqlConnection("Server=tcp:myservereasj.database.windows.net,1433;Initial Catalog=mydatabase;Persist Security Info=False;User ID=Serveradmin;Password=Test12345; Connection Timeout=30;");
-
             var query = "INSERT INTO Customer (Cpr, Name, BankId) VALUES(@Cpr, @Name, @BankId)";
 
             SqlCommand inserCommand = new SqlCommand(query, conn);
-            inserCommand.Parameters.AddWithValue("@Cpr", value.Cpr);
-            inserCommand.Parameters.AddWithValue("@Name", value.Name);
-            inserCommand.Parameters.AddWithValue("@BankId", value.BankId);
+            inserCommand.Parameters.AddWithValue("@Cpr", customer.Cpr);
+            inserCommand.Parameters.AddWithValue("@Name", customer.Name);
+            inserCommand.Parameters.AddWithValue("@BankId", customer.BankId);
  
             conn.Open();
             inserCommand.ExecuteNonQuery();
@@ -94,11 +90,20 @@ namespace BankRestWebservice.Controllers
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
         {
+           
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ActionName("DeleteCustomer")]
+        public void Delete(int customerId)
         {
+            var query = $"DELETE FROM Customer FROM Account AS Customer WHERE customerId = '{customerId}';" + 
+                $"DELETE FROM Customer WHERE customerId = '{customerId}'";
+
+            SqlCommand inserCommand = new SqlCommand(query, conn);
+
+            conn.Open();
+            inserCommand.ExecuteNonQuery();
         }
     }
 }
