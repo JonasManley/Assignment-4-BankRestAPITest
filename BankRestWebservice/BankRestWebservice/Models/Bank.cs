@@ -10,8 +10,13 @@ namespace BankRestWebservice.Models
     {
         private string cvr;
         private string name;
+        private int bankId;
         private static List<IAccount> accounts = new List<IAccount>();
 
+        public Bank()
+        {
+
+        }
         public Bank(string cvr, string name)
         {
             this.cvr = cvr;
@@ -45,5 +50,24 @@ namespace BankRestWebservice.Models
             }
             return null;
         }
+
+        public string Cvr
+        {
+            get { return cvr; }
+            set { cvr = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public int BankId
+        {
+            get { return bankId; }
+            set { bankId = value; }
+        }
+
     }
 }
