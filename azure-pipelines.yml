@@ -3,8 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-
-
 trigger:
 - master
 
@@ -40,5 +38,9 @@ steps:
     connectionType: 'connectedServiceNameARM'
     azureServiceConnection: 'Microsoft Imagine(0e20856b-7b49-43e4-8b80-48b5a71663b7)'
     method: 'GET'
-    urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
+    headers: |
+      {
+      "Content-Type":"application/json"
+      }
+    urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Account'
     waitForCompletion: 'false'
