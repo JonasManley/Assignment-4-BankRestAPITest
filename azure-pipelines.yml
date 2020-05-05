@@ -1,15 +1,9 @@
 # ASP.NET Core (.NET Framework)
-- task: InvokeRESTAPI@1
-  inputs:
-    connectionType: 'connectedServiceNameARM'
-    azureServiceConnection: 'Microsoft Imagine(0e20856b-7b49-43e4-8b80-48b5a71663b7)'
-    method: 'GET'
-    urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
-    waitForCompletion: 'false'
-    
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+
 
 trigger:
 - master
@@ -40,3 +34,11 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceNameARM'
+    azureServiceConnection: 'Microsoft Imagine(0e20856b-7b49-43e4-8b80-48b5a71663b7)'
+    method: 'GET'
+    urlSuffix: 'https://bankrestwebservice20200504092410.azurewebsites.net/api/Customer'
+    waitForCompletion: 'false'
