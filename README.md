@@ -7,11 +7,11 @@ In the case that there are discrepancies between contract methods with DTOs
 and the functionality needed for the API endpoints; adjust the contract.
 Remember to adjust contract tests as well.
 Set up tests for the Rest API, using one or more of the following.
-• Using your package manager (Maven)
-• Creating a separate project, using setUp and tearDown methods to
+- Using your package manager (Maven)
+- Creating a separate project, using setUp and tearDown methods to
 start the service.
-• Using A CI-server
-• A dedicated REST test tool (e.g. Postman)
+- Using A CI-server
+- A dedicated REST test tool (e.g. Postman)
 
 ## API
 
